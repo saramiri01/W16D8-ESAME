@@ -1,0 +1,1992 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "cf996e81-78cf-4fef-8e05-f1524f905f86",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "import pandas as pd"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "6f445497-f2a0-4e2b-9558-0b836a645c63",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "csvcovid = pd.read_csv('C://Users/39351/ESAME FINALE/owid-covid-data.csv', dtype={'NomeColonna33': str}, low_memory=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "27a6afd6-e09d-4f10-b9b5-7a8e50e97f48",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>iso_code</th>\n",
+       "      <th>continent</th>\n",
+       "      <th>location</th>\n",
+       "      <th>date</th>\n",
+       "      <th>total_cases</th>\n",
+       "      <th>new_cases</th>\n",
+       "      <th>new_cases_smoothed</th>\n",
+       "      <th>total_deaths</th>\n",
+       "      <th>new_deaths</th>\n",
+       "      <th>new_deaths_smoothed</th>\n",
+       "      <th>...</th>\n",
+       "      <th>male_smokers</th>\n",
+       "      <th>handwashing_facilities</th>\n",
+       "      <th>hospital_beds_per_thousand</th>\n",
+       "      <th>life_expectancy</th>\n",
+       "      <th>human_development_index</th>\n",
+       "      <th>population</th>\n",
+       "      <th>excess_mortality_cumulative_absolute</th>\n",
+       "      <th>excess_mortality_cumulative</th>\n",
+       "      <th>excess_mortality</th>\n",
+       "      <th>excess_mortality_cumulative_per_million</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>AFG</td>\n",
+       "      <td>Asia</td>\n",
+       "      <td>Afghanistan</td>\n",
+       "      <td>2020-01-05</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>...</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>37.746</td>\n",
+       "      <td>0.5</td>\n",
+       "      <td>64.83</td>\n",
+       "      <td>0.511</td>\n",
+       "      <td>41128772.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>AFG</td>\n",
+       "      <td>Asia</td>\n",
+       "      <td>Afghanistan</td>\n",
+       "      <td>2020-01-06</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>...</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>37.746</td>\n",
+       "      <td>0.5</td>\n",
+       "      <td>64.83</td>\n",
+       "      <td>0.511</td>\n",
+       "      <td>41128772.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>AFG</td>\n",
+       "      <td>Asia</td>\n",
+       "      <td>Afghanistan</td>\n",
+       "      <td>2020-01-07</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>...</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>37.746</td>\n",
+       "      <td>0.5</td>\n",
+       "      <td>64.83</td>\n",
+       "      <td>0.511</td>\n",
+       "      <td>41128772.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>AFG</td>\n",
+       "      <td>Asia</td>\n",
+       "      <td>Afghanistan</td>\n",
+       "      <td>2020-01-08</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>...</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>37.746</td>\n",
+       "      <td>0.5</td>\n",
+       "      <td>64.83</td>\n",
+       "      <td>0.511</td>\n",
+       "      <td>41128772.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>AFG</td>\n",
+       "      <td>Asia</td>\n",
+       "      <td>Afghanistan</td>\n",
+       "      <td>2020-01-09</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>...</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>37.746</td>\n",
+       "      <td>0.5</td>\n",
+       "      <td>64.83</td>\n",
+       "      <td>0.511</td>\n",
+       "      <td>41128772.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>...</th>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>376980</th>\n",
+       "      <td>ZWE</td>\n",
+       "      <td>Africa</td>\n",
+       "      <td>Zimbabwe</td>\n",
+       "      <td>2024-01-31</td>\n",
+       "      <td>266265.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>4.429</td>\n",
+       "      <td>5737.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>...</td>\n",
+       "      <td>30.7</td>\n",
+       "      <td>36.791</td>\n",
+       "      <td>1.7</td>\n",
+       "      <td>61.49</td>\n",
+       "      <td>0.571</td>\n",
+       "      <td>16320539.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>376981</th>\n",
+       "      <td>ZWE</td>\n",
+       "      <td>Africa</td>\n",
+       "      <td>Zimbabwe</td>\n",
+       "      <td>2024-02-01</td>\n",
+       "      <td>266265.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>4.429</td>\n",
+       "      <td>5737.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>...</td>\n",
+       "      <td>30.7</td>\n",
+       "      <td>36.791</td>\n",
+       "      <td>1.7</td>\n",
+       "      <td>61.49</td>\n",
+       "      <td>0.571</td>\n",
+       "      <td>16320539.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>376982</th>\n",
+       "      <td>ZWE</td>\n",
+       "      <td>Africa</td>\n",
+       "      <td>Zimbabwe</td>\n",
+       "      <td>2024-02-02</td>\n",
+       "      <td>266265.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>4.429</td>\n",
+       "      <td>5737.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>...</td>\n",
+       "      <td>30.7</td>\n",
+       "      <td>36.791</td>\n",
+       "      <td>1.7</td>\n",
+       "      <td>61.49</td>\n",
+       "      <td>0.571</td>\n",
+       "      <td>16320539.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>376983</th>\n",
+       "      <td>ZWE</td>\n",
+       "      <td>Africa</td>\n",
+       "      <td>Zimbabwe</td>\n",
+       "      <td>2024-02-03</td>\n",
+       "      <td>266265.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>4.429</td>\n",
+       "      <td>5737.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>...</td>\n",
+       "      <td>30.7</td>\n",
+       "      <td>36.791</td>\n",
+       "      <td>1.7</td>\n",
+       "      <td>61.49</td>\n",
+       "      <td>0.571</td>\n",
+       "      <td>16320539.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>376984</th>\n",
+       "      <td>ZWE</td>\n",
+       "      <td>Africa</td>\n",
+       "      <td>Zimbabwe</td>\n",
+       "      <td>2024-02-04</td>\n",
+       "      <td>266265.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.000</td>\n",
+       "      <td>5737.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>...</td>\n",
+       "      <td>30.7</td>\n",
+       "      <td>36.791</td>\n",
+       "      <td>1.7</td>\n",
+       "      <td>61.49</td>\n",
+       "      <td>0.571</td>\n",
+       "      <td>16320539.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>376985 rows × 67 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       iso_code continent     location        date  total_cases  new_cases  \\\n",
+       "0           AFG      Asia  Afghanistan  2020-01-05          NaN        0.0   \n",
+       "1           AFG      Asia  Afghanistan  2020-01-06          NaN        0.0   \n",
+       "2           AFG      Asia  Afghanistan  2020-01-07          NaN        0.0   \n",
+       "3           AFG      Asia  Afghanistan  2020-01-08          NaN        0.0   \n",
+       "4           AFG      Asia  Afghanistan  2020-01-09          NaN        0.0   \n",
+       "...         ...       ...          ...         ...          ...        ...   \n",
+       "376980      ZWE    Africa     Zimbabwe  2024-01-31     266265.0        0.0   \n",
+       "376981      ZWE    Africa     Zimbabwe  2024-02-01     266265.0        0.0   \n",
+       "376982      ZWE    Africa     Zimbabwe  2024-02-02     266265.0        0.0   \n",
+       "376983      ZWE    Africa     Zimbabwe  2024-02-03     266265.0        0.0   \n",
+       "376984      ZWE    Africa     Zimbabwe  2024-02-04     266265.0        0.0   \n",
+       "\n",
+       "        new_cases_smoothed  total_deaths  new_deaths  new_deaths_smoothed  \\\n",
+       "0                      NaN           NaN         0.0                  NaN   \n",
+       "1                      NaN           NaN         0.0                  NaN   \n",
+       "2                      NaN           NaN         0.0                  NaN   \n",
+       "3                      NaN           NaN         0.0                  NaN   \n",
+       "4                      NaN           NaN         0.0                  NaN   \n",
+       "...                    ...           ...         ...                  ...   \n",
+       "376980               4.429        5737.0         0.0                  0.0   \n",
+       "376981               4.429        5737.0         0.0                  0.0   \n",
+       "376982               4.429        5737.0         0.0                  0.0   \n",
+       "376983               4.429        5737.0         0.0                  0.0   \n",
+       "376984               0.000        5737.0         0.0                  0.0   \n",
+       "\n",
+       "        ...  male_smokers  handwashing_facilities  hospital_beds_per_thousand  \\\n",
+       "0       ...           NaN                  37.746                         0.5   \n",
+       "1       ...           NaN                  37.746                         0.5   \n",
+       "2       ...           NaN                  37.746                         0.5   \n",
+       "3       ...           NaN                  37.746                         0.5   \n",
+       "4       ...           NaN                  37.746                         0.5   \n",
+       "...     ...           ...                     ...                         ...   \n",
+       "376980  ...          30.7                  36.791                         1.7   \n",
+       "376981  ...          30.7                  36.791                         1.7   \n",
+       "376982  ...          30.7                  36.791                         1.7   \n",
+       "376983  ...          30.7                  36.791                         1.7   \n",
+       "376984  ...          30.7                  36.791                         1.7   \n",
+       "\n",
+       "        life_expectancy  human_development_index  population  \\\n",
+       "0                 64.83                    0.511  41128772.0   \n",
+       "1                 64.83                    0.511  41128772.0   \n",
+       "2                 64.83                    0.511  41128772.0   \n",
+       "3                 64.83                    0.511  41128772.0   \n",
+       "4                 64.83                    0.511  41128772.0   \n",
+       "...                 ...                      ...         ...   \n",
+       "376980            61.49                    0.571  16320539.0   \n",
+       "376981            61.49                    0.571  16320539.0   \n",
+       "376982            61.49                    0.571  16320539.0   \n",
+       "376983            61.49                    0.571  16320539.0   \n",
+       "376984            61.49                    0.571  16320539.0   \n",
+       "\n",
+       "        excess_mortality_cumulative_absolute  excess_mortality_cumulative  \\\n",
+       "0                                        NaN                          NaN   \n",
+       "1                                        NaN                          NaN   \n",
+       "2                                        NaN                          NaN   \n",
+       "3                                        NaN                          NaN   \n",
+       "4                                        NaN                          NaN   \n",
+       "...                                      ...                          ...   \n",
+       "376980                                   NaN                          NaN   \n",
+       "376981                                   NaN                          NaN   \n",
+       "376982                                   NaN                          NaN   \n",
+       "376983                                   NaN                          NaN   \n",
+       "376984                                   NaN                          NaN   \n",
+       "\n",
+       "        excess_mortality  excess_mortality_cumulative_per_million  \n",
+       "0                    NaN                                      NaN  \n",
+       "1                    NaN                                      NaN  \n",
+       "2                    NaN                                      NaN  \n",
+       "3                    NaN                                      NaN  \n",
+       "4                    NaN                                      NaN  \n",
+       "...                  ...                                      ...  \n",
+       "376980               NaN                                      NaN  \n",
+       "376981               NaN                                      NaN  \n",
+       "376982               NaN                                      NaN  \n",
+       "376983               NaN                                      NaN  \n",
+       "376984               NaN                                      NaN  \n",
+       "\n",
+       "[376985 rows x 67 columns]"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "csvcovid"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "4e952e0a-3b1e-46a7-babe-daf2400e15ae",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Si richiede di verificare le dimensioni del dataset e le diciture presenti nell'intestazione;"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "be10b863-a12b-4cba-bddf-388ac6bfc074",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(376985, 67)"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "csvcovid.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "adf3a3bd-66bc-4ac0-bb4c-8759d8df4f62",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>iso_code</th>\n",
+       "      <th>continent</th>\n",
+       "      <th>location</th>\n",
+       "      <th>date</th>\n",
+       "      <th>total_cases</th>\n",
+       "      <th>new_cases</th>\n",
+       "      <th>new_cases_smoothed</th>\n",
+       "      <th>total_deaths</th>\n",
+       "      <th>new_deaths</th>\n",
+       "      <th>new_deaths_smoothed</th>\n",
+       "      <th>...</th>\n",
+       "      <th>male_smokers</th>\n",
+       "      <th>handwashing_facilities</th>\n",
+       "      <th>hospital_beds_per_thousand</th>\n",
+       "      <th>life_expectancy</th>\n",
+       "      <th>human_development_index</th>\n",
+       "      <th>population</th>\n",
+       "      <th>excess_mortality_cumulative_absolute</th>\n",
+       "      <th>excess_mortality_cumulative</th>\n",
+       "      <th>excess_mortality</th>\n",
+       "      <th>excess_mortality_cumulative_per_million</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>0 rows × 67 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "Empty DataFrame\n",
+       "Columns: [iso_code, continent, location, date, total_cases, new_cases, new_cases_smoothed, total_deaths, new_deaths, new_deaths_smoothed, total_cases_per_million, new_cases_per_million, new_cases_smoothed_per_million, total_deaths_per_million, new_deaths_per_million, new_deaths_smoothed_per_million, reproduction_rate, icu_patients, icu_patients_per_million, hosp_patients, hosp_patients_per_million, weekly_icu_admissions, weekly_icu_admissions_per_million, weekly_hosp_admissions, weekly_hosp_admissions_per_million, total_tests, new_tests, total_tests_per_thousand, new_tests_per_thousand, new_tests_smoothed, new_tests_smoothed_per_thousand, positive_rate, tests_per_case, tests_units, total_vaccinations, people_vaccinated, people_fully_vaccinated, total_boosters, new_vaccinations, new_vaccinations_smoothed, total_vaccinations_per_hundred, people_vaccinated_per_hundred, people_fully_vaccinated_per_hundred, total_boosters_per_hundred, new_vaccinations_smoothed_per_million, new_people_vaccinated_smoothed, new_people_vaccinated_smoothed_per_hundred, stringency_index, population_density, median_age, aged_65_older, aged_70_older, gdp_per_capita, extreme_poverty, cardiovasc_death_rate, diabetes_prevalence, female_smokers, male_smokers, handwashing_facilities, hospital_beds_per_thousand, life_expectancy, human_development_index, population, excess_mortality_cumulative_absolute, excess_mortality_cumulative, excess_mortality, excess_mortality_cumulative_per_million]\n",
+       "Index: []\n",
+       "\n",
+       "[0 rows x 67 columns]"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "csvcovid.head(0)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "607d071a-e002-4fda-958d-f72dd4dac55c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Si chiede poi per ogni continente di trovare il numero di casi totali avvenuti in quello stesso continente; si chiede di non considerare eventuali locazioni che nel dataset non appartengono ad alcun continente;"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "b57ec6ac-d3f4-43a7-af63-034c7be18e94",
+   "metadata": {},
+   "source": [
+    "prima di tutto ho bisogno di filtrare le righe che rappresentano i continenti:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "b8c12e8d-ebe8-499b-9aca-ae5378d70737",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "continent= csvcovid[csvcovid['continent'].notnull()]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "e0d82d49-fc95-419f-8b46-2255a8734c30",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>iso_code</th>\n",
+       "      <th>continent</th>\n",
+       "      <th>location</th>\n",
+       "      <th>date</th>\n",
+       "      <th>total_cases</th>\n",
+       "      <th>new_cases</th>\n",
+       "      <th>new_cases_smoothed</th>\n",
+       "      <th>total_deaths</th>\n",
+       "      <th>new_deaths</th>\n",
+       "      <th>new_deaths_smoothed</th>\n",
+       "      <th>...</th>\n",
+       "      <th>male_smokers</th>\n",
+       "      <th>handwashing_facilities</th>\n",
+       "      <th>hospital_beds_per_thousand</th>\n",
+       "      <th>life_expectancy</th>\n",
+       "      <th>human_development_index</th>\n",
+       "      <th>population</th>\n",
+       "      <th>excess_mortality_cumulative_absolute</th>\n",
+       "      <th>excess_mortality_cumulative</th>\n",
+       "      <th>excess_mortality</th>\n",
+       "      <th>excess_mortality_cumulative_per_million</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>AFG</td>\n",
+       "      <td>Asia</td>\n",
+       "      <td>Afghanistan</td>\n",
+       "      <td>2020-01-05</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>...</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>37.746</td>\n",
+       "      <td>0.5</td>\n",
+       "      <td>64.83</td>\n",
+       "      <td>0.511</td>\n",
+       "      <td>41128772.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>AFG</td>\n",
+       "      <td>Asia</td>\n",
+       "      <td>Afghanistan</td>\n",
+       "      <td>2020-01-06</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>...</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>37.746</td>\n",
+       "      <td>0.5</td>\n",
+       "      <td>64.83</td>\n",
+       "      <td>0.511</td>\n",
+       "      <td>41128772.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>AFG</td>\n",
+       "      <td>Asia</td>\n",
+       "      <td>Afghanistan</td>\n",
+       "      <td>2020-01-07</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>...</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>37.746</td>\n",
+       "      <td>0.5</td>\n",
+       "      <td>64.83</td>\n",
+       "      <td>0.511</td>\n",
+       "      <td>41128772.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>AFG</td>\n",
+       "      <td>Asia</td>\n",
+       "      <td>Afghanistan</td>\n",
+       "      <td>2020-01-08</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>...</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>37.746</td>\n",
+       "      <td>0.5</td>\n",
+       "      <td>64.83</td>\n",
+       "      <td>0.511</td>\n",
+       "      <td>41128772.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>AFG</td>\n",
+       "      <td>Asia</td>\n",
+       "      <td>Afghanistan</td>\n",
+       "      <td>2020-01-09</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>...</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>37.746</td>\n",
+       "      <td>0.5</td>\n",
+       "      <td>64.83</td>\n",
+       "      <td>0.511</td>\n",
+       "      <td>41128772.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>...</th>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>376980</th>\n",
+       "      <td>ZWE</td>\n",
+       "      <td>Africa</td>\n",
+       "      <td>Zimbabwe</td>\n",
+       "      <td>2024-01-31</td>\n",
+       "      <td>266265.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>4.429</td>\n",
+       "      <td>5737.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>...</td>\n",
+       "      <td>30.7</td>\n",
+       "      <td>36.791</td>\n",
+       "      <td>1.7</td>\n",
+       "      <td>61.49</td>\n",
+       "      <td>0.571</td>\n",
+       "      <td>16320539.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>376981</th>\n",
+       "      <td>ZWE</td>\n",
+       "      <td>Africa</td>\n",
+       "      <td>Zimbabwe</td>\n",
+       "      <td>2024-02-01</td>\n",
+       "      <td>266265.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>4.429</td>\n",
+       "      <td>5737.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>...</td>\n",
+       "      <td>30.7</td>\n",
+       "      <td>36.791</td>\n",
+       "      <td>1.7</td>\n",
+       "      <td>61.49</td>\n",
+       "      <td>0.571</td>\n",
+       "      <td>16320539.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>376982</th>\n",
+       "      <td>ZWE</td>\n",
+       "      <td>Africa</td>\n",
+       "      <td>Zimbabwe</td>\n",
+       "      <td>2024-02-02</td>\n",
+       "      <td>266265.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>4.429</td>\n",
+       "      <td>5737.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>...</td>\n",
+       "      <td>30.7</td>\n",
+       "      <td>36.791</td>\n",
+       "      <td>1.7</td>\n",
+       "      <td>61.49</td>\n",
+       "      <td>0.571</td>\n",
+       "      <td>16320539.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>376983</th>\n",
+       "      <td>ZWE</td>\n",
+       "      <td>Africa</td>\n",
+       "      <td>Zimbabwe</td>\n",
+       "      <td>2024-02-03</td>\n",
+       "      <td>266265.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>4.429</td>\n",
+       "      <td>5737.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>...</td>\n",
+       "      <td>30.7</td>\n",
+       "      <td>36.791</td>\n",
+       "      <td>1.7</td>\n",
+       "      <td>61.49</td>\n",
+       "      <td>0.571</td>\n",
+       "      <td>16320539.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>376984</th>\n",
+       "      <td>ZWE</td>\n",
+       "      <td>Africa</td>\n",
+       "      <td>Zimbabwe</td>\n",
+       "      <td>2024-02-04</td>\n",
+       "      <td>266265.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.000</td>\n",
+       "      <td>5737.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>...</td>\n",
+       "      <td>30.7</td>\n",
+       "      <td>36.791</td>\n",
+       "      <td>1.7</td>\n",
+       "      <td>61.49</td>\n",
+       "      <td>0.571</td>\n",
+       "      <td>16320539.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>358926 rows × 67 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       iso_code continent     location        date  total_cases  new_cases  \\\n",
+       "0           AFG      Asia  Afghanistan  2020-01-05          NaN        0.0   \n",
+       "1           AFG      Asia  Afghanistan  2020-01-06          NaN        0.0   \n",
+       "2           AFG      Asia  Afghanistan  2020-01-07          NaN        0.0   \n",
+       "3           AFG      Asia  Afghanistan  2020-01-08          NaN        0.0   \n",
+       "4           AFG      Asia  Afghanistan  2020-01-09          NaN        0.0   \n",
+       "...         ...       ...          ...         ...          ...        ...   \n",
+       "376980      ZWE    Africa     Zimbabwe  2024-01-31     266265.0        0.0   \n",
+       "376981      ZWE    Africa     Zimbabwe  2024-02-01     266265.0        0.0   \n",
+       "376982      ZWE    Africa     Zimbabwe  2024-02-02     266265.0        0.0   \n",
+       "376983      ZWE    Africa     Zimbabwe  2024-02-03     266265.0        0.0   \n",
+       "376984      ZWE    Africa     Zimbabwe  2024-02-04     266265.0        0.0   \n",
+       "\n",
+       "        new_cases_smoothed  total_deaths  new_deaths  new_deaths_smoothed  \\\n",
+       "0                      NaN           NaN         0.0                  NaN   \n",
+       "1                      NaN           NaN         0.0                  NaN   \n",
+       "2                      NaN           NaN         0.0                  NaN   \n",
+       "3                      NaN           NaN         0.0                  NaN   \n",
+       "4                      NaN           NaN         0.0                  NaN   \n",
+       "...                    ...           ...         ...                  ...   \n",
+       "376980               4.429        5737.0         0.0                  0.0   \n",
+       "376981               4.429        5737.0         0.0                  0.0   \n",
+       "376982               4.429        5737.0         0.0                  0.0   \n",
+       "376983               4.429        5737.0         0.0                  0.0   \n",
+       "376984               0.000        5737.0         0.0                  0.0   \n",
+       "\n",
+       "        ...  male_smokers  handwashing_facilities  hospital_beds_per_thousand  \\\n",
+       "0       ...           NaN                  37.746                         0.5   \n",
+       "1       ...           NaN                  37.746                         0.5   \n",
+       "2       ...           NaN                  37.746                         0.5   \n",
+       "3       ...           NaN                  37.746                         0.5   \n",
+       "4       ...           NaN                  37.746                         0.5   \n",
+       "...     ...           ...                     ...                         ...   \n",
+       "376980  ...          30.7                  36.791                         1.7   \n",
+       "376981  ...          30.7                  36.791                         1.7   \n",
+       "376982  ...          30.7                  36.791                         1.7   \n",
+       "376983  ...          30.7                  36.791                         1.7   \n",
+       "376984  ...          30.7                  36.791                         1.7   \n",
+       "\n",
+       "        life_expectancy  human_development_index  population  \\\n",
+       "0                 64.83                    0.511  41128772.0   \n",
+       "1                 64.83                    0.511  41128772.0   \n",
+       "2                 64.83                    0.511  41128772.0   \n",
+       "3                 64.83                    0.511  41128772.0   \n",
+       "4                 64.83                    0.511  41128772.0   \n",
+       "...                 ...                      ...         ...   \n",
+       "376980            61.49                    0.571  16320539.0   \n",
+       "376981            61.49                    0.571  16320539.0   \n",
+       "376982            61.49                    0.571  16320539.0   \n",
+       "376983            61.49                    0.571  16320539.0   \n",
+       "376984            61.49                    0.571  16320539.0   \n",
+       "\n",
+       "        excess_mortality_cumulative_absolute  excess_mortality_cumulative  \\\n",
+       "0                                        NaN                          NaN   \n",
+       "1                                        NaN                          NaN   \n",
+       "2                                        NaN                          NaN   \n",
+       "3                                        NaN                          NaN   \n",
+       "4                                        NaN                          NaN   \n",
+       "...                                      ...                          ...   \n",
+       "376980                                   NaN                          NaN   \n",
+       "376981                                   NaN                          NaN   \n",
+       "376982                                   NaN                          NaN   \n",
+       "376983                                   NaN                          NaN   \n",
+       "376984                                   NaN                          NaN   \n",
+       "\n",
+       "        excess_mortality  excess_mortality_cumulative_per_million  \n",
+       "0                    NaN                                      NaN  \n",
+       "1                    NaN                                      NaN  \n",
+       "2                    NaN                                      NaN  \n",
+       "3                    NaN                                      NaN  \n",
+       "4                    NaN                                      NaN  \n",
+       "...                  ...                                      ...  \n",
+       "376980               NaN                                      NaN  \n",
+       "376981               NaN                                      NaN  \n",
+       "376982               NaN                                      NaN  \n",
+       "376983               NaN                                      NaN  \n",
+       "376984               NaN                                      NaN  \n",
+       "\n",
+       "[358926 rows x 67 columns]"
+      ]
+     },
+     "execution_count": 14,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "continent"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "6f420abd-6649-491a-bf80-b89bca31c99b",
+   "metadata": {},
+   "source": [
+    "adesso devo raggruppare per continente e sommare i casi totali per ogni continente"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "420f088e-15f6-4b56-af05-6f79e7d5044c",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "totalcasesforcontinent=continent.groupby('continent')['new_cases'].sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "267fa0bf-b624-444c-b49e-9d38a6e32963",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "continent\n",
+      "Africa            13136517.0\n",
+      "Asia             301391174.0\n",
+      "Europe           252013370.0\n",
+      "North America    124526003.0\n",
+      "Oceania           14741735.0\n",
+      "South America     68752780.0\n",
+      "Name: new_cases, dtype: float64\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(totalcasesforcontinent)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "aba4950d-b8c0-44a7-9702-1ba842e836d8",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "DFtotalcasesforcontinent=pd.DataFrame(totalcasesforcontinent)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "f7159d77-0c8f-4fb8-b694-d5b3ccf1e31d",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>new_cases</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>continent</th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>Africa</th>\n",
+       "      <td>13136517.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Asia</th>\n",
+       "      <td>301391174.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Europe</th>\n",
+       "      <td>252013370.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>North America</th>\n",
+       "      <td>124526003.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Oceania</th>\n",
+       "      <td>14741735.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>South America</th>\n",
+       "      <td>68752780.0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                 new_cases\n",
+       "continent                 \n",
+       "Africa          13136517.0\n",
+       "Asia           301391174.0\n",
+       "Europe         252013370.0\n",
+       "North America  124526003.0\n",
+       "Oceania         14741735.0\n",
+       "South America   68752780.0"
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "DFtotalcasesforcontinent"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "81a6efed-c329-4e48-8e5e-e560e333ba26",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Sempre riguardo i casi di COVID totali, si chiede di sviluppare una funzione che prenda in input il dataset e due nomi di continenti, e che ne confronti i seguenti relativi descrittori statistici: valori minimo e massimo, media, e percentuale rispetto al numero dei casi totali nel mondo (calcolati anche sulle locazioni senza indicazione di continente);"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "id": "5e028cd8-c296-437a-b893-83eec5f8757f",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "somma dei total cases 3282553220.0\n"
+     ]
+    }
+   ],
+   "source": [
+    "sommatotalcases=(csvcovid['new_cases'].sum())\n",
+    "print('somma dei total cases',sommatotalcases)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8021e88d-fcc8-4665-aabe-2735c2839a6a",
+   "metadata": {},
+   "source": [
+    "filtro le righe che contegono i continenti specifici "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "id": "2abdec75-c887-4307-9a2a-568fd466acd2",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "Oceania=csvcovid[csvcovid['continent']=='Oceania']\n",
+    "Asia=csvcovid[csvcovid['continent']=='Asia']"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8701b2c4-9f00-49aa-9e15-303347b78005",
+   "metadata": {},
+   "source": [
+    "Descrittori statistici: calcolare min, max, percentuale per Oceania, Asia e anche per tutti i continenti "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "id": "1c959a46-b284-42c4-b2d7-c968ccdded0d",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "Descrittori per tutti i continenti:\n",
+      "min     0.000000e+00\n",
+      "max     4.423623e+07\n",
+      "mean    8.965883e+03\n",
+      "Name: new_cases, dtype: float64\n",
+      "\n",
+      "Descrittori per il continente Asia:\n",
+      "min     0.000000e+00\n",
+      "max     4.047548e+07\n",
+      "mean    4.298159e+03\n",
+      "Name: new_cases, dtype: float64\n",
+      "\n",
+      "Descrittori per il continente Oceania:\n",
+      "min          0.000000\n",
+      "max     588813.000000\n",
+      "mean       411.722804\n",
+      "Name: new_cases, dtype: float64\n"
+     ]
+    }
+   ],
+   "source": [
+    "descrittoriTot=csvcovid['new_cases'].describe()[['min', 'max', 'mean']]\n",
+    "print(\"\\nDescrittori per tutti i continenti:\")\n",
+    "print(descrittoriTot)\n",
+    "descrittoriAsia=Asia['new_cases'].describe()[['min', 'max', 'mean']]\n",
+    "print(\"\\nDescrittori per il continente Asia:\")\n",
+    "print(descrittoriAsia)\n",
+    "descrittoriOceania=Oceania['new_cases'].describe()[['min', 'max', 'mean']]\n",
+    "print(\"\\nDescrittori per il continente Oceania:\")\n",
+    "print(descrittoriOceania) "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "cc068f99-63ea-4a49-afde-8cc1156c67ee",
+   "metadata": {},
+   "source": [
+    "Calcolo le percentuali dei casi totali rispetto al totale mondiale "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 111,
+   "id": "5cd74867-4b3d-446a-8159-29555ab90596",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "Percentuali dell'Asia rispetto ai casi mondiali totali:\n",
+      "9.18%\n",
+      "\n",
+      "Percentuali dell'Oceania rispetto ai casi mondiali totali:\n",
+      "0.45%\n",
+      "Percentuale totale per ogni continente: \n",
+      "Africa: 0.40%\n",
+      "Asia: 9.18%\n",
+      "Europe: 7.68%\n",
+      "North America: 3.79%\n",
+      "Oceania: 0.45%\n",
+      "South America: 2.09%\n"
+     ]
+    }
+   ],
+   "source": [
+    "perc_Asia=Asia['new_cases'].sum()/sommatotalcases*100\n",
+    "print(\"\\nPercentuali dell'Asia rispetto ai casi mondiali totali:\")\n",
+    "print(f'{perc_Asia:.2f}%')\n",
+    "perc_Oceania=Oceania['new_cases'].sum()/sommatotalcases*100\n",
+    "print(\"\\nPercentuali dell'Oceania rispetto ai casi mondiali totali:\")\n",
+    "print(f'{perc_Oceania:.2f}%')\n",
+    "perc_casiTot_continente=csvcovid.groupby('continent')['new_cases'].sum()/sommatotalcases*100\n",
+    "print('Percentuale totale per ogni continente: ')\n",
+    "for continent, percentuale in perc_casiTot_continente.items():\n",
+    "    print(f'{continent}: {percentuale:.2f}%')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 51,
+   "id": "3b070ae1-717c-4b43-9076-40ff2c3a3ffc",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "DF_percasitotali=pd.DataFrame(perc_casiTot_continente)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 53,
+   "id": "69f4e084-c4cc-453d-b344-11d0adbbd5df",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>new_cases</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>continent</th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>Africa</th>\n",
+       "      <td>0.400192</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Asia</th>\n",
+       "      <td>9.181608</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Europe</th>\n",
+       "      <td>7.677358</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>North America</th>\n",
+       "      <td>3.793571</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Oceania</th>\n",
+       "      <td>0.449094</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>South America</th>\n",
+       "      <td>2.094491</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "               new_cases\n",
+       "continent               \n",
+       "Africa          0.400192\n",
+       "Asia            9.181608\n",
+       "Europe          7.677358\n",
+       "North America   3.793571\n",
+       "Oceania         0.449094\n",
+       "South America   2.094491"
+      ]
+     },
+     "execution_count": 53,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "DF_percasitotali"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 105,
+   "id": "3bcb1c00-ff39-44e5-a73e-fa3b0f1b28a0",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "image/png": "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RESkPL2bheXLl2PQoEE4dOgQfH19dV6umoiIiAo+vZuFTz75BH379oW7u3t+5CEiIiIjo/d5FlJTU3H37t38yEJERERGSO9mYfHixfjuu+/yIwsREREZIb03Q7Rq1Qrt27dH165d4efnh7S0NK37XV1dDRaOiIiIlKd3sxATE4O9e/fmRxYiIiIyQno3C0OGDMmPHERERGSk9N5nAXh+LQgXFxcMGzYMxYoVAwBUqFAB1tbWBg1HREREytN7zYKDgwOOHDkCBwcHWFpa4tixY0hISMCECRNQpEgRjBgxIj9yEhERkUL0XrOwfPlyeHt7o2TJklCr1ZrxvXv38uyNREREhVCujoZo2bJllqMg7t+/D3t7e4MFIyIiIuOg95oFlUoFU1PTLOOVKlVCfHy8QUIRERGR8dC7WTh27Bi+//57zW0RgbW1NWbNmoXDhw8bMhsREREZAb03Q4wZMwaenp7w8/NDkSJFsHPnTtSoUQORkZHo379/fmQkIiIiBendLISFheHdd9/FJ598gsaNG0OlUuG3337Djh07kJycnB8ZiYiISEF6NwsAkJycjM2bN2Pz5s0GjkNERETGRu99Fn788UcMHjw4y/jgwYMxYcIEg4QiIiIi46F3s/D111/j5s2bWcb9/PwwfPhwg4QiIiIi46F3s1C+fHmEhYVlGY+IiECFChUMEoqIiIiMh97NQkhICFq2bJllvGXLlggNDTVIKCIiIjIeeu/guGHDBixbtgzm5uY4ceIEAMDFxQU///wzFi9ebPCAREREpCy9m4Wff/4ZpUqVwi+//AILCwsAz4+OWLBgAX766SeDByQiIiJl6dUsqFQqtGrVCgsWLMCcOXPg7OwMtVqNO3fuIDU1Nb8yEhERkYL0ahaePXuGf/75B87Ozrh37x68vb3zKxcREREZCb13cPTx8YGTk1N+ZCEiIiIjpHezMGXKFCxatAgffvghypcvDxsbG60iIiKiwkXvHRyPHDkCADhw4ABERDNuYmICEYGZWa7OIE1ERERGSu/f7O3bt8+PHERERGSk9G4WvLy88iMHERERGSm991kAgFatWmHbtm04e/YsKlasCAAYMGBAtmd2JCIiooJN72ahd+/e+Oeff6BWq9GoUSNYWloCAGxsbDB58mSDByQiIiJl6d0sTJ06FcOHD8ewYcOQlpamGT937hwaNWpk0HBE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",
+      "text/plain": [
+       "<Figure size 600x400 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "import matplotlib.pyplot as plt\n",
+    "plt.style.use('dark_background')\n",
+    "fluorescent_purple = (0.8, 0.0, 1.0)\n",
+    "edge_color = fluorescent_purple\n",
+    "face_color ='none'\n",
+    "DF_percasitotali.plot(kind='bar', figsize=(6,4), color= face_color, edgecolor= edge_color)\n",
+    "plt.title('Percentuale Covid mondiale per continente')\n",
+    "plt.xlabel('Continente')\n",
+    "plt.ylabel('Percentuale dei casi totali')\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 75,
+   "id": "e47368d8-e429-49e2-bc2b-7fca54c37c92",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "def confronto(csvcovid,Asia,Oceania):  \n",
+    "\n",
+    "    Oceania=csvcovid[csvcovid['continent']=='Oceania']\n",
+    "    Asia=csvcovid[csvcovid['continent']=='Asia']\n",
+    "    descrittoriTot=csvcovid['new_cases'].describe()[['min', 'max', 'mean']]\n",
+    "    descrittoriAsia=Asia['new_cases'].describe()[['min', 'max', 'mean']]\n",
+    "    descrittoriOceania=Oceania['new_cases'].describe()[['min', 'max', 'mean']]\n",
+    "    return descrittoriTot, descrittoriAsia, descrittoriOceania"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 76,
+   "id": "dca355cf-6f71-414e-b1d5-f74066bafc52",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "risultato=confronto(csvcovid,Asia,Oceania)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 77,
+   "id": "10caf6fc-743a-4ead-8178-e9c8a9b8e6a7",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "DFrisultato=pd.DataFrame(risultato,index=['Continenti_totali','Asia','Oceania'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 78,
+   "id": "5e1a7e7b-43bb-4be8-a564-846956badb4e",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>min</th>\n",
+       "      <th>max</th>\n",
+       "      <th>mean</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>Continenti_totali</th>\n",
+       "      <td>0.0</td>\n",
+       "      <td>44236227.0</td>\n",
+       "      <td>8965.882999</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Asia</th>\n",
+       "      <td>0.0</td>\n",
+       "      <td>40475477.0</td>\n",
+       "      <td>4298.158526</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Oceania</th>\n",
+       "      <td>0.0</td>\n",
+       "      <td>588813.0</td>\n",
+       "      <td>411.722804</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                   min         max         mean\n",
+       "Continenti_totali  0.0  44236227.0  8965.882999\n",
+       "Asia               0.0  40475477.0  4298.158526\n",
+       "Oceania            0.0    588813.0   411.722804"
+      ]
+     },
+     "execution_count": 78,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "DFrisultato"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ae8abcd0-a09f-41cf-8121-fcd80586d4e7",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Si chiede poi di effettuare lo stesso tipo di analisi – anche in questo caso sviluppando una funzione ad hoc – per il numero di vaccinazioni totali per ogni continente;"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 90,
+   "id": "609fed2a-c7b8-4908-8a98-e7f6d4383d44",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "totalvacc=csvcovid['total_vaccinations'].sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 91,
+   "id": "b96cbb8b-aca2-4108-b5c8-7f3974db85e0",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "40674465662916.0"
+      ]
+     },
+     "execution_count": 91,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "totalvacc"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 81,
+   "id": "8ef1565d-61fb-4b51-9f17-28ec7f1efd30",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "totvaccforcontinent=csvcovid.groupby('continent')['total_vaccinations'].sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 83,
+   "id": "0a7efacb-4751-4672-b1eb-129ca468fe5b",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "continent\n",
+       "Africa           5.081307e+10\n",
+       "Asia             4.323161e+12\n",
+       "Europe           7.251537e+11\n",
+       "North America    5.709678e+11\n",
+       "Oceania          2.599179e+10\n",
+       "South America    4.271463e+11\n",
+       "Name: total_vaccinations, dtype: float64"
+      ]
+     },
+     "execution_count": 83,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "totvaccforcontinent"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 84,
+   "id": "45e0068b-1c85-4263-8b5f-a372ac1399b6",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "DFtotvaccforcontinent=pd.DataFrame(totvaccforcontinent)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 86,
+   "id": "a5b94fc8-4c6d-4a68-9bf7-938123020e51",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>total_vaccinations</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>continent</th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>Africa</th>\n",
+       "      <td>5.081307e+10</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Asia</th>\n",
+       "      <td>4.323161e+12</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Europe</th>\n",
+       "      <td>7.251537e+11</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>North America</th>\n",
+       "      <td>5.709678e+11</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Oceania</th>\n",
+       "      <td>2.599179e+10</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>South America</th>\n",
+       "      <td>4.271463e+11</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "               total_vaccinations\n",
+       "continent                        \n",
+       "Africa               5.081307e+10\n",
+       "Asia                 4.323161e+12\n",
+       "Europe               7.251537e+11\n",
+       "North America        5.709678e+11\n",
+       "Oceania              2.599179e+10\n",
+       "South America        4.271463e+11"
+      ]
+     },
+     "execution_count": 86,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "DFtotvaccforcontinent"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 88,
+   "id": "87af7a94-c92e-4a29-b0bb-2267089e2dbe",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Descrittori delle vaccinazioni totali per continente: \n",
+      "               min           max          mean\n",
+      "continent                                     \n",
+      "Africa         0.0  1.330480e+08  8.012152e+06\n",
+      "Asia           0.0  3.491077e+09  2.307285e+08\n",
+      "Europe         0.0  1.922215e+08  2.727577e+07\n",
+      "North America  0.0  6.767288e+08  6.472090e+07\n",
+      "Oceania        0.0  6.930634e+07  1.261737e+07\n",
+      "South America  0.0  4.864364e+08  6.595835e+07\n"
+     ]
+    }
+   ],
+   "source": [
+    "Descrittori_tot_V=csvcovid.groupby('continent')['total_vaccinations'].describe()[['min', 'max', 'mean']]\n",
+    "print(\"Descrittori delle vaccinazioni totali per continente: \")\n",
+    "print(Descrittori_tot_V)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 93,
+   "id": "89e1f40a-7319-4436-9807-ad3c8ffbb3c5",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Percentuale totale dei vaccini per ogni continente: \n",
+      "continent\n",
+      "Africa            0.124926\n",
+      "Asia             10.628685\n",
+      "Europe            1.782823\n",
+      "North America     1.403750\n",
+      "Oceania           0.063902\n",
+      "South America     1.050158\n",
+      "Name: total_vaccinations, dtype: float64\n"
+     ]
+    }
+   ],
+   "source": [
+    "perc_totxcontinenti=csvcovid.groupby('continent')['total_vaccinations'].sum()/totalvacc*100\n",
+    "print(\"Percentuale totale dei vaccini per ogni continente: \")\n",
+    "print(perc_totxcontinenti)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 112,
+   "id": "8daea5d9-98d5-4e69-afb4-d8d432255a2e",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Percentuale totale dei vaccini per ogni continente:\n",
+      "Africa: 0.12%\n",
+      "Asia: 10.63%\n",
+      "Europe: 1.78%\n",
+      "North America: 1.40%\n",
+      "Oceania: 0.06%\n",
+      "South America: 1.05%\n"
+     ]
+    }
+   ],
+   "source": [
+    "print('Percentuale totale dei vaccini per ogni continente:')\n",
+    "for continent, percentuale in perc_totxcontinenti.items():\n",
+    "    print(f'{continent}: {percentuale:.2f}%')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 100,
+   "id": "496e66c7-5c08-40a9-8ea9-4a3e2754ce20",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "image/png": "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uIHBgwejdevWhl4VERERFZPBPwL4+++/0a1bN9SvXx8A0Lx5c3To0EEXCB5lZWUFW1tbvSIiIqKSZfA9AEuWLEGFChVw+fJl5OXlwdzcHDNmzMCWLVsKnH/atGmYO3euodsgIiKiQhh8D8CgQYMwbNgwDBkyBC+99BI8PDzwxRdfYMSIEQXOv2jRItjZ2enK0dHR0C0RERHRIwy+B2Dp0qVYvHgxtm7dCgAIDg6Gs7Mzpk2bho0bN+abPzs7G9nZ2YZug4iIiAph8D0A5cqVw/379/XG8vLyYGbGSw4QEREZC4PvAfD19cWMGTMQFRWFkJAQvPjii5g0aRK8vLwMvSoiIiIqJoMHgAkTJmDBggVYt24dHBwccOfOHaxfvx7z58839KqIiIiomAweANLS0jBx4kRMnDjR0IsmIiIiA+EH80RERCrEAEBERKRCDABEREQqxABARESkQgwAREREKsQAQEREpEIMAERERCrEAEBERKRCDABEREQqxABARESkQgwAREREKsQAQEREpEIMAERERCrEAEBERKRCDABEREQqxABARESkQgwAREREKsQAQEREpEIMAERERCrEAEBERKRCDABEREQqxABARESkQgwAREREKsQAQEREpEIMAERERCrEAEBERKRCDABEREQqxABARESkQgwAREREKsQAQEREpEIMAERERCrEAEBERKRCDABEREQqxABARESkQgwAREREKsQAQEREpEIMAERERCrEAEBERKRCDABEREQqxABARESkQgwAREREKsQAQEREpEIMAERERCrEAEBERKRCJRIAatasiU2bNiEhIQHp6em4cOECXnrppZJYFRERERWDhaEXWLFiRQQEBMDf3x+9e/dGXFwc6tati+TkZEOvioiIiIrJ4AFg6tSpuHnzJkaNGqUbu3HjhqFXQ0RERM/A4B8B9O3bF2fPnsW2bdsQGxuL8+fPY8yYMY+d38rKCra2tnpFREREJcvgAaBOnToYP348rl69il69euG7777DqlWrMHz48ALnnzZtGlJSUnR1+/ZtQ7dEREREBRBDVlZWlgQEBOiNrVy5Uk6cOFHg/FZWVmJra6urmjVrioiIra2tQftiPX01xItyFiIN8aLivZhSbywWi6V02draPvXfUIPvAYiOjkZoaKjeWFhYGJycnAqcPzs7G6mpqXpFREREJcvgASAgIAANGzbUG2vQoAEPBCQiIjIiBg8Anp6eaNu2LaZNm4a6deti8ODBGDt2LNauXWvoVREREVExGTwAnD17Fv3798fgwYMRHByMWbNm4bPPPsOvv/5q6FURERFRMRn8OgAAsHfvXuzdu7ckFk1EREQGwHsBEBERqRADABERkQoxABAREakQAwAREZEKMQAQERGpEAMAERGRCjEAEBERqRADABERkQoxABAREakQAwAREZEKMQAQERGpEAMAERGRCjEAEBERqRADABERkQoxABAREakQAwAREZEKMQAQERGpEAMAERGRCjEAEBERqRADABERkQoxABAREakQAwAREZEKMQAQERGpEAMAERGRCjEAEBERqRADABERkQoxABAREakQAwAREZEKMQAQERGpEAMAERGRCjEAEBERqRADABERkQoxABAREakQAwAREZEKMQAQERGpEAMAERGRCjEAEBERqRADABERkQoxABAREakQAwAREZEKMQAQERGpEAMAERGRCjEAEBERqRADABERkQqVeAD48ssvISLw9PQs6VURERHRUyrRANC6dWuMHTsWgYGBJbkaIiIiKqISCwA2Njbw8fHB+++/j6SkpJJaDRERERVDiQWAtWvXYu/evfDz8yt0PisrK9ja2uoVERERlSyLkljooEGD8NJLL+Hll19+4rzTpk3D3LlzS6INIiIiegyD7wF44YUXsHLlSgwbNgxZWVlPnH/RokWws7PTlaOjo6FbIiIiokcYfA9Aq1atUK1aNZw7d+7/VmJhgU6dOuHjjz9GmTJlcP/+fd207OxsZGdnG7oNIiIiKoTBA4Cfnx+aNm2qN+bt7Y3Lly9jyZIlen/8iYiISBkGDwBpaWkICQnRG0tPT8fdu3fzjRMREZEyeCVAIiIiFSqRswAe5ebm9jxWQ0RERE+JewCIiIhUiAGAiIhIhRgAiIiIVIgBgIiISIUYAIiIiFSIAYCIiEiFGACIiIhUiAGAiIhIhRgAiIiIVIgBgIiISIUYAIiIiFSIAYCIiEiFGACIiIhUiAGAiIhIhRgAiIiIVIgBgIiISIUYAIiIiFSIAYCIiEiFGACIiIhUiAGAiIhIhRgAiIiIVIgBgIiISIUYAIiIiFSIAYCIiEiFGACIiIhUiAGAiIhIhRgAiIiIVIgBgIiISIUYAIiIiFSIAYCIiEiFGACIiIhUiAGAiIhIhRgAiIiIVIgBgIiISIUYAIiIiFSIAYCIiEiFGACIiIhUiAGAiIhIhRgAiIiIVIgBgIiISIUYAIiIiFSIAYCIiEiFGACIiIhUiAGAiIhIhRgAiIiIVMjgAeDLL7/E6dOnkZKSgtjYWOzcuRMNGjQw9GqIiIjoGRg8AHTu3Blr165F27Zt0aNHD1hYWODQoUMoV66coVdFRERExWRh6AX27t1b7/F7772H+Ph4tGrVCsePHzf06oiIiKgYDB4AHlWhQgUAQGJiYoHTraysUKZMGd1jW1vbkm6JiIhI9Ur8IMBvvvkGx48fR0hISIHTp02bhpSUFF3dvn27pFsiIiJSvRINAGvWrEHz5s0xePDgx86zaNEi2NnZ6crR0bEkWyIiIiKU4EcAq1atQt++fdGpU6dC39VnZ2cjOzu7pNogIiKiApRIAFi9ejX69++PLl264Pr16yWxCiIiInoGBg8Aa9euxZAhQ/DWW28hNTUV1apVAwDcu3cPmZmZhl4dERERFYPBA8CHH34IADh69Kje+MiRI7FhwwZDr47IqFRDLVSEvdJtFCgZCYjFTaXbICIjYfAAoNFoDL1IIpNQDbWwHWGwho3SrRQoA+l4G64MAUQE4DlcB4BILSrCHtawwUwMRSTClG5HjwtcsRA+qAh7BgAiAsAAQGRwkQjDv7igdBtERIXi3QCJiIhUiAGAiIhIhRgAiIiIVIgBgIiISIUYAIiIiFSIAYCIiEiFeBogESmKV08kUgYDABEphldPJFIOAwARKYZXTyRSDgMAESmOV08kev54ECAREZEKMQAQERGpEAMAERGRCjEAEBERqRADABERkQoxABAREakQTwMkIiJV4FUn9TEAEBFRqcerTubHAEBERKUerzqZHwMAERGpBq86+X94ECAREZEKMQAQERGpEAMAERGRCjEAEBERqRADABERkQoxABAREakQAwAREZEKMQAQERGpEAMAERGRCjEAEBERqRADABERkQoxABAREakQAwAREZEKMQAQERGpEAMAERGRCjEAEBERqRADABERkQoxABAREakQAwAREZEKMQAQERGpEAMAERGRClko3cDzUA21UBH2SrdRoGQkIBY3lW6DiIhUpsQCwPjx4zF58mTUqFEDISEh+Oyzz/D333+X1OoeqxpqYTvCYA2b577up5GBdLwNV4YAIiJ6rkok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",
+      "text/plain": [
+       "<Figure size 600x400 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "plt.style.use('dark_background')\n",
+    "fluorescent_purple= (0.8, 0.0, 1.0)\n",
+    "perc_totxcontinenti.plot(kind='bar', figsize=(6,4), color=face_color,edgecolor=edge_color)\n",
+    "plt.legend(['vaccinazioni'])\n",
+    "plt.title('Percentuale vaccini mondiale')\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 106,
+   "id": "48e8c165-26bc-4873-b0a4-dd43b4c9dbe6",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "def confrontovacc (csvcovid,totalvacc,totvaccforcontinent):\n",
+    "    totalvacc= csvcovid['total_vaccinations'].sum()\n",
+    "    totvaccforcontinent= csvcovid.groupby('continent')['total_vaccinations'].sum()\n",
+    "    Descrittori_tot_V= csvcovid.groupby('continent')['total_vaccinations'].describe()[['min', 'max','mean']]\n",
+    "    return Descrittori_tot_V\n",
+    "risultatovacc = confrontovacc(csvcovid,totalvacc,totvaccforcontinent)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 107,
+   "id": "0bb1b2dc-9156-4f2e-b3ea-4d943e214bb9",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>min</th>\n",
+       "      <th>max</th>\n",
+       "      <th>mean</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>continent</th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>Africa</th>\n",
+       "      <td>0.0</td>\n",
+       "      <td>1.330480e+08</td>\n",
+       "      <td>8.012152e+06</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Asia</th>\n",
+       "      <td>0.0</td>\n",
+       "      <td>3.491077e+09</td>\n",
+       "      <td>2.307285e+08</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Europe</th>\n",
+       "      <td>0.0</td>\n",
+       "      <td>1.922215e+08</td>\n",
+       "      <td>2.727577e+07</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>North America</th>\n",
+       "      <td>0.0</td>\n",
+       "      <td>6.767288e+08</td>\n",
+       "      <td>6.472090e+07</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Oceania</th>\n",
+       "      <td>0.0</td>\n",
+       "      <td>6.930634e+07</td>\n",
+       "      <td>1.261737e+07</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>South America</th>\n",
+       "      <td>0.0</td>\n",
+       "      <td>4.864364e+08</td>\n",
+       "      <td>6.595835e+07</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "               min           max          mean\n",
+       "continent                                     \n",
+       "Africa         0.0  1.330480e+08  8.012152e+06\n",
+       "Asia           0.0  3.491077e+09  2.307285e+08\n",
+       "Europe         0.0  1.922215e+08  2.727577e+07\n",
+       "North America  0.0  6.767288e+08  6.472090e+07\n",
+       "Oceania        0.0  6.930634e+07  1.261737e+07\n",
+       "South America  0.0  4.864364e+08  6.595835e+07"
+      ]
+     },
+     "execution_count": 107,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "risultatovacc"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "85a878ce-2d0c-4f06-bead-25691b972c66",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Alla fine, basandosi sui calcoli fatti, il committente chiede di stilare un breve (tre o quattro righe) paragrafo testuale riassuntivo sulle statistiche di casi e vaccinazioni, che si concentri solo sulle differenze esistenti tra Europa, Sud America e Oceania."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "42802dd1-9501-409d-8e15-073b84923225",
+   "metadata": {},
+   "source": [
+    "Emerge una chiara disparità tra Europa, Sud America e Oceania nella gestione della pandemia da COVID e nell'implementazione delle vaccinazioni. L'Europa, pur registrando un elevato numero di casi confermati, si distingue per il maggior numero di vaccinazioni somministrate. Al contrario, il Sud America, pur avendo meno casi rispetto all'Europa, mostra un livello inferiore di vaccinazioni. Infine, l'Oceania presenta una bassa incidenza di casi e una quantità limitata di vaccinazioni. Questi dati mettono in evidenza l'importanza di un'equa distribuzione dei vaccini che contrasti l'estensione della pandemia."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
